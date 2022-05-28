@@ -4,7 +4,7 @@ import SFProText from '../assets/fonts/SFProText-Regular.ttf';
 const theme = createTheme({
     palette: {
         primary: {
-            main: 'linear-gradient(to right bottom, #1C94F4, #1273EA)',
+            main: '#1C94F4',
         },
         text: {
             primary: '#151A30',
