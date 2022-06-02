@@ -13,9 +13,11 @@ export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const StyledInput = styled(TextField)({
+    maxWidth: 438,
+    height: 40,
     borderRadius: 8,
     marginTop: 0,
-    border: '1px solid #C5CEE0',
+    // border: '1px solid #C5CEE0',
 });
 
 export function InputField({ name, control, label, apiError, InputProps, ...inputProps }: InputFieldProps) {

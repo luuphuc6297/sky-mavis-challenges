@@ -1,5 +1,8 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+
+const LoginContainer = React.lazy(() => import('containers/auth/Login'));
+const WalletContainer = React.lazy(() => import('containers/wallet'));
 const MainLayout = React.lazy(() => import('layouts/main'));
 
 const Router = () => {
@@ -8,8 +11,15 @@ const Router = () => {
             path: '/',
             element: <MainLayout />,
             children: [
-                { index: true, path: '/login', element: <div>Login page</div> },
-                { path: '/wallet', element: <div>Wallet page</div> },
+                { path: '/login', element: <LoginContainer /> },
+                {
+                    path: '/wallet',
+                    element: <WalletContainer />,
+                    // children: [
+                    //     { path: '', index: true, element: <WalletContainer /> },
+                    //     { path: '/asset', element: <div></div> },
+                    // ],
+                },
             ],
         },
     ]);

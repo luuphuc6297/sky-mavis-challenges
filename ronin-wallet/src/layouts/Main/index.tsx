@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { styled } from '@mui/system';
 import { MainBackground } from 'assets';
-import AuthProvider from 'lib/AuthProvider';
+// import AuthProvider from 'libs/AuthProvider';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -10,16 +10,18 @@ interface MainLayoutProps {
 }
 
 const StyledMainLayout = styled(Box)({
-    background: MainBackground,
+    margin: '0 auto',
+    backgroundImage: `url(${MainBackground})`,
+    backgroundRepeat: 'repeat',
 });
 
 const MainLayout = ({ children }: MainLayoutProps) => {
     return (
         <StyledMainLayout>
-            <AuthProvider>
+            {/* <AuthProvider> */}
                 {children}
                 <Outlet />
-            </AuthProvider>
+            {/* </AuthProvider> */}
         </StyledMainLayout>
     );
 };
