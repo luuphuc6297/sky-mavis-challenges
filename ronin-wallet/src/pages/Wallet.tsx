@@ -1,6 +1,6 @@
 import { Container, Grid } from '@mui/material';
 import { styled } from '@mui/system';
-import { Account, RoninStatus } from 'components';
+import { Account, MyWallet, RoninStatus } from 'components';
 import React from 'react';
 
 const StyledGridContainer = styled(Grid)({
@@ -22,6 +22,9 @@ const WalletPage = () => {
                     <Grid item>
                         <Account />
                     </Grid>
+                </Grid>
+                <Grid>
+                    <MyWallet />
                 </Grid>
             </StyledContainer>
         </StyledGridContainer>
