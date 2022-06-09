@@ -3,8 +3,8 @@ import { styled } from '@mui/system';
 import React from 'react';
 
 interface CustomInputLabelProps {
-    children: string;
-    htmlFor: string;
+    children?: string;
+    htmlFor?: string;
 }
 const CustomInputLabel = styled(InputLabel)({
     fontSize: 10,

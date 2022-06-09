@@ -1,6 +1,6 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import { Account, MyWallet, RoninStatus } from 'components';
+import { Account, AssetCard, MyWallet, NavigateBar, RoninStatus, AssetListPopup, SendAssetAppBar } from 'components';
 import React from 'react';
 
 const StyledGridContainer = styled(Grid)({
@@ -10,6 +10,13 @@ const StyledGridContainer = styled(Grid)({
 const StyledContainer = styled(Container)({
     margin: '0 auto',
 });
+
+const StyledAssetTitle = styled(Typography)(({ theme }) => ({
+    fontWeight: 700,
+    fontSize: 16,
+    lineHeight: '20px',
+    color: theme.palette.text.primary,
+}));
 
 const WalletPage = () => {
     return (
@@ -26,6 +33,15 @@ const WalletPage = () => {
                 <Grid>
                     <MyWallet />
                 </Grid>
+                <Grid>
+                    <NavigateBar />
+                </Grid>
+                <StyledAssetTitle>Assets</StyledAssetTitle>
+                <Grid>
+                    <AssetCard />
+                </Grid>
+                <AssetListPopup />
+                <SendAssetAppBar />
             </StyledContainer>
         </StyledGridContainer>
     );

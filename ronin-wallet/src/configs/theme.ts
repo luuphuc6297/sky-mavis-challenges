@@ -1,12 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-// import SFProTextTTF from 'public/fonts/SFProText-Regular.ttf';
 const SFProTextTTF = '/fonts/SFProText-Regular.ttf';
-
-
-const SFProText = {
-    fontFamily: 'SF Pro Text',
-    src: `url(${SFProTextTTF}) format("ttf")`,
-};
 
 const theme = createTheme({
     palette: {
@@ -20,20 +13,20 @@ const theme = createTheme({
     typography: {
         fontFamily: ['SF Pro Text'].join(','),
         h1: { fontSize: 32, fontWeight: 700, lineHeight: '32px' },
+        body1: { fontSize: 16, fontWeight: 700, lineHeight: '20px' },
+        body2: { fontSize: 14, fontWeight: 600, lineHeight: '20px' },
         caption: { fontSize: 14, fontWeight: 400, lineHeight: '20px' },
         button: { fontSize: 14, fontWeight: 600, lineHeight: '20px', textTransform: 'none' },
     },
     components: {
         MuiCssBaseline: {
             styleOverrides: `
-                @font-face: [${SFProText}]
-                // @font-face {
-                // font-family: 'SF Pro Text';
-                // font-style: normal;
-                // font-display: swap;
-                // font-weight: 400;
-                // src: url(${SFProText}) format('ttf');
-                // }
+                @font-face {
+                    font-family: SF Pro Text;
+                    src: url('${SFProTextTTF}') format('truetype');
+                    font-weight: normal;
+                    font-style: normal;
+                }
             `,
         },
     },

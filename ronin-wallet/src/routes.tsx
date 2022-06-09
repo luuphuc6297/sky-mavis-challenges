@@ -4,6 +4,7 @@ import { useRoutes } from 'react-router-dom';
 const LoginContainer = React.lazy(() => import('containers/auth/Login'));
 const WalletContainer = React.lazy(() => import('containers/wallet'));
 const MainLayout = React.lazy(() => import('layouts/main'));
+const SendAssetContainer = React.lazy(() => import('containers/transfer/SendAsset'));
 
 const Router = () => {
     return useRoutes([
@@ -15,10 +16,10 @@ const Router = () => {
                 {
                     path: '/wallet',
                     element: <WalletContainer />,
-                    // children: [
-                    //     { path: '', index: true, element: <WalletContainer /> },
-                    //     { path: '/asset', element: <div></div> },
-                    // ],
+                },
+                {
+                    path: '/send',
+                    element: <SendAssetContainer />,
                 },
             ],
         },

@@ -1,8 +1,10 @@
 import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { styled } from '@mui/system';
-import { CopyIconUrl } from 'assets';
+import { CopyIconUrl, WhiteLogoUrl } from 'assets';
+import { formatter, numberWithSpaces } from 'helpers';
 import React from 'react';
+
 type GradientBoxProps = {
     colors?: string[];
 };
@@ -71,6 +73,11 @@ const StyledMainAssetVnd = styled(Typography)(({ theme }) => ({
     lineHeight: '24px',
 }));
 
+const StyledWhiteLogo = styled('img')(({ theme }) => ({
+    width: 38,
+    height: 40,
+}));
+
 export const MyWallet = () => {
     return (
         <GradientBox colors={[blue[500], blue[700]]}>
@@ -78,7 +85,7 @@ export const MyWallet = () => {
                 <Grid item>
                     <Grid container>
                         <StyledTypography>My wallet</StyledTypography>
-                        <StyledAddress>(7300 3777 3888 3334)</StyledAddress>
+                        <StyledAddress>({numberWithSpaces(7300377738883334)})</StyledAddress>
                     </Grid>
                 </Grid>
                 <Grid item>
@@ -90,8 +97,11 @@ export const MyWallet = () => {
             <StyledDivider />
             <Grid container direction="row" justifyContent="space-between" alignItems="center">
                 <Grid item>
-                    <StyledMainAssetUsd>1000 USD</StyledMainAssetUsd>
+                    <StyledMainAssetUsd>{formatter.format(1000)} USD</StyledMainAssetUsd>
                     <StyledMainAssetVnd>23,046,000 VND</StyledMainAssetVnd>
+                </Grid>
+                <Grid item>
+                    <StyledWhiteLogo src={WhiteLogoUrl} />
                 </Grid>
             </Grid>
         </GradientBox>

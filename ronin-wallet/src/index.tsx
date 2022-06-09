@@ -1,24 +1,11 @@
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import { createStore, Provider } from 'app/store';
-import theme from 'configs/theme';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Router from './routes';
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Provider createStore={createStore}>
-                <ThemeProvider theme={theme}>
-                    <Router />
-                    <CssBaseline />
-                </ThemeProvider>
-            </Provider>
-        </BrowserRouter>
+        <App />
     </React.StrictMode>
 );
 
