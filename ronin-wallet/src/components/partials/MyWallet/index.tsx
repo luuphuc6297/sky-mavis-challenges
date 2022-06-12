@@ -63,6 +63,7 @@ const StyledDivider = styled(Divider)(({ theme }) => ({
 }));
 
 const StyledMainAssetUsd = styled(Typography)(({ theme }) => ({
+    fontFamily: 'SF Pro Text Medium',
     fontSize: 32,
     fontWeight: 700,
     color: 'white',

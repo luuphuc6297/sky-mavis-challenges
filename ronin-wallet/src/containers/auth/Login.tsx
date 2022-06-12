@@ -12,15 +12,12 @@ const LoginContainer = () => {
     const { currencies, getCurrentUser, storeCurrencies }: RoninAppStoreState | any = useStore();
 
     React.useEffect(() => {
-        localStorage.removeItem('access_token');
-    });
-
-    React.useEffect(() => {
         if (isEmpty(currencies)) {
             (async () => {
                 storeCurrencies();
             })();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleLogin = async (formValues: LoginProps) => {

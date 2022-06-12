@@ -3,17 +3,16 @@ import WalletPage from 'pages/Wallet';
 import React from 'react';
 
 const WalletContainer = () => {
-    // const currencies = useQuery<ListResponse<Currency>, Error>('currencies', currencyApi.getCurrencies);
-
-    const { user, getWallet }: RoninAppStoreState | any = useStore();
+    const { user, wallet, getWallet }: RoninAppStoreState | any = useStore();
 
     React.useEffect(() => {
-        if (user) {
+        if (user?.id) {
             (async () => {
-                await getWallet();
+                await getWallet(user?.roninAddress);
             })();
         }
-    }, [getWallet, user]);
-    return <WalletPage />;
+    }, [user]);
+
+    return <>{wallet?.assets && <WalletPage />}</>;
 };
 export default WalletContainer;

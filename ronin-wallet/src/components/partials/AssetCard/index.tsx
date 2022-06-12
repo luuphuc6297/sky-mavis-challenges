@@ -1,7 +1,12 @@
 import { Box, Card, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import { EURIconUrl } from 'assets';
+import { convertToVnd, formatForVnd } from 'helpers';
 import React from 'react';
+interface AssetCardProps {
+    logo?: string;
+    code?: string;
+    amount?: number;
+}
 
 const StyledCard = styled(Card)(({ theme }) => ({
     width: 336,
@@ -10,9 +15,10 @@ const StyledCard = styled(Card)(({ theme }) => ({
     paddingBottom: 16,
     backgroundColor: '#F7F9FC',
     boxShadow: 'none',
+    marginBottom: 8,
     '&:hover': {
         transform: 'scale(1.05)',
-        transitionDuration: '0.5s',
+        transitionDuration: '0.5s !important',
         backgroundColor: '#e1e3e6',
     },
 }));
@@ -36,16 +42,29 @@ const StyledVnd = styled(Typography)(({ theme }) => ({
     color: '#8F9BB3',
 }));
 
-export const AssetCard = () => {
+export const AssetCard = ({ logo, code, amount }: AssetCardProps) => {
+
+    const [vndAmount, setVndAmount] = React.useState(0);
+
+    React.useEffect(() => {
+        if (code && amount) {
+            (async () => {
+                const vnd: number | any = await convertToVnd(code, amount);
+                setVndAmount(vnd);
+            })();
+        }
+    }, [amount, code]);
+
+
     return (
         <StyledCard>
             <Box sx={{ display: 'flex' }}>
                 <StyledCurrenciesIconWrapper sx={{ display: 'flex', alignItems: 'center' }}>
-                    <StyledCurrenciesIcon src={EURIconUrl} />
+                    <StyledCurrenciesIcon src={logo} />
                 </StyledCurrenciesIconWrapper>
                 <Box>
-                    <StyledCurrency variant="body2">50 EUR</StyledCurrency>
-                    <StyledVnd>1,531,972 VND</StyledVnd>
+                    <StyledCurrency variant="body2">{`${amount} ${code}`}</StyledCurrency>
+                    <StyledVnd>{formatForVnd(vndAmount)} VND</StyledVnd>
                 </Box>
             </Box>
         </StyledCard>

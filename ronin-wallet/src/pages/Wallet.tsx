@@ -1,7 +1,9 @@
 import { Container, Grid, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { RoninAppStoreState, useStore } from 'app/store';
 import { Account, AssetCard, MyWallet, NavigateBar, RoninStatus } from 'components';
 import React from 'react';
+import { Assets } from 'models';
 
 const StyledGridContainer = styled(Grid)({
     height: '100vh',
@@ -40,6 +42,8 @@ const StyledAssetTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const WalletPage = () => {
+    const { wallet }: RoninAppStoreState | any = useStore();
+
     return (
         <StyledGridContainer container>
             <StyledContainer maxWidth="sm">
@@ -60,8 +64,16 @@ const WalletPage = () => {
                     </Grid>
                     <Grid item>
                         <StyledAssetTitle>Assets</StyledAssetTitle>
-                        <Grid xs={6}>
-                            <AssetCard />
+                        <Grid item xs={6}>
+                            {wallet &&
+                                wallet?.assets.map((asset: Assets) => (
+                                    <AssetCard
+                                        key={asset?.id}
+                                        logo={asset?.logo}
+                                        code={asset?.code}
+                                        amount={asset?.amount}
+                                    />
+                                ))}
                         </Grid>
                     </Grid>
                 </StyledGridWallet>

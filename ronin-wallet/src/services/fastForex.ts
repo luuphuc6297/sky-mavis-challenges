@@ -15,11 +15,12 @@ const fastForexApis = {
         });
     },
     // Convert an amount of one currency into another currency
-    convertCurrency(to: string, amount: number): Promise<FastForexProps> {
-        const url = '/convert?to=VND&amount=10&api_key=9b04816be2-92dd6507b9-rdb35j';
+    convertCurrency(from: string, amount: number): Promise<FastForexProps> {
+        const url = '/convert';
         return axiosServicesClient.get(url, {
             params: {
-                to: to,
+                from: from,
+                to: 'VND',
                 amount: amount,
                 api_key: FASTFOREX_API_KEY,
             },

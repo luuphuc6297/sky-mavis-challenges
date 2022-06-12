@@ -3,12 +3,14 @@ import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { Box, CircularProgress, Container, Grid, IconButton, InputAdornment, Typography } from '@mui/material';
 import { styled } from '@mui/system';
+import { RoninAppStoreState, useStore } from 'app/store';
 import { LogoUrl } from 'assets';
 import { InputField, SubmitButton } from 'components';
 import { TextFiledLabel } from 'components/base/Typography';
 import { LoginProps } from 'models';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { LoginSchema } from './validation';
 export interface LoginFormProps {
     initialValues?: LoginProps;
@@ -42,7 +44,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
+    const navigate = useNavigate();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
+
     const {
         control,
         handleSubmit,
@@ -62,9 +66,8 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     };
     const handleFormSubmit = async (formValues: LoginProps) => {
         try {
-            // Clear previous submission error
-            // await onSubmit?.(formValues);
-            // dispatch(authActions.clearError());
+            await onSubmit?.(formValues);
+            navigate('/wallet', { replace: true });
         } catch (error: any) {
             console.log('error', error);
         }

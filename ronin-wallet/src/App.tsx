@@ -17,7 +17,6 @@ const App = () => {
                     queries: {
                         retry: 0,
                         refetchOnWindowFocus: false,
-                        // queryFn: defaultQueryFn,
                     },
                 },
             })
