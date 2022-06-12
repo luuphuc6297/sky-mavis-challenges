@@ -37,7 +37,7 @@ import { devtools, persist } from 'zustand/middleware';
 //     ...createCurrencySlice(set, get),
 //     ...createUserSlice(set, get),
 // });
-
+// const useStore = create(createRootSlice);
 export interface RoninAppStoreState {
     user: User;
     currencies: Currency[];
@@ -66,8 +66,8 @@ const createStore = () =>
                         const result = await userApis.getCurrentUser();
                         set({ user: result });
                     },
-                    getWallet: async () => {
-                        const result = await userApis.getWallet();
+                    getWallet: async (roninAddress: string) => {
+                        const result = await userApis.getWallet(roninAddress);
                         set({ wallet: result });
                     },
                     storeCurrencies: async () => {

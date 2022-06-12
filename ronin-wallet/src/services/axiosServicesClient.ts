@@ -1,21 +1,16 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { getToken } from 'utils';
 
-const axiosClient = axios.create({
-    baseURL: 'https://ronin-server.herokuapp.com/api',
+const axiosServicesClient = axios.create({
+    baseURL: 'https://api.fastforex.io',
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
 // Add a request interceptor
-axiosClient.interceptors.request.use(
+axiosServicesClient.interceptors.request.use(
     function (config: AxiosRequestConfig) {
         // Do something before request is sent
-        const token = getToken();
-        if (token) {
-            config!.headers!.Authorization = `Bearer ${token}`;
-        }
         return config;
     },
     function (error) {
@@ -25,7 +20,7 @@ axiosClient.interceptors.request.use(
 );
 
 // Add a response interceptor
-axiosClient.interceptors.response.use(
+axiosServicesClient.interceptors.response.use(
     function (response: AxiosResponse) {
         // Any status code that lie within the range of 2xx cause this function to trigger
         // Do something with response data
@@ -38,4 +33,4 @@ axiosClient.interceptors.response.use(
     }
 );
 
-export default axiosClient;
+export default axiosServicesClient;

@@ -1,14 +1,24 @@
 import { createTheme } from '@mui/material/styles';
 const SFProTextTTF = '/fonts/SFProText-Regular.ttf';
-const SFProTextHeavyTFF = '/fonts/SFProText-Heavy.ttf';
+const SFProTextMediumTFF = '/fonts/SFProText-Medium.ttf';
 declare module '@mui/material/styles/createTypography' {
     interface TypographyOptions {
-        heavy: string;
+        medium: string;
     }
     interface Typography {
-        heavy: string;
+        medium: string;
     }
 }
+
+const SFProText = `@font-face {
+    font-family: SF Pro Text;
+    src: url(${SFProTextTTF}) format("opentype");
+}`;
+
+const SFProTextMedium = `@font-face {
+    font-family: SF Pro Text Medium;
+    src: url(${SFProTextMediumTFF}) format("opentype");
+}`;
 
 const theme = createTheme({
     palette: {
@@ -21,7 +31,7 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: ['SF Pro Text'].join(','),
-        heavy: 'SF Pro Text Heavy',
+        medium: 'SF Pro Text Medium',
         h1: { fontSize: 32, fontWeight: 700, lineHeight: '32px' },
         body1: { fontSize: 16, fontWeight: 700, lineHeight: '20px' },
         body2: { fontSize: 14, fontWeight: 600, lineHeight: '20px' },
@@ -38,12 +48,8 @@ const theme = createTheme({
         },
         MuiCssBaseline: {
             styleOverrides: `
-                @font-face {
-                    font-family: SF Pro Text;
-                    src: url('${SFProTextTTF}') format('truetype');
-                    font-weight: normal;
-                    font-style: normal;
-                }
+            ${SFProText}
+            ${SFProTextMedium}
             `,
         },
     },

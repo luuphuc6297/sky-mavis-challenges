@@ -1,13 +1,14 @@
+import { DEFAULT_USER_ID } from 'constant/common';
 import { User, Wallet } from 'models';
 import axiosClient from './axiosClient';
 
 const userApis = {
     getCurrentUser(): Promise<User> {
-        const url = `/users/9d4e77b4-efc2-4c8a-9b26-86207c60d6f5`;
+        const url = `/users/${DEFAULT_USER_ID}`;
         return axiosClient.get(url);
     },
-    getWallet(): Promise<Wallet> {
-        const url = '/wallets/';
+    getWallet(roninAddress: string): Promise<Wallet> {
+        const url = `/wallets/${roninAddress}`;
         return axiosClient.get(url);
     },
 };

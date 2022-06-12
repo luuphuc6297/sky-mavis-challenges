@@ -22,6 +22,7 @@ const Logo = styled('img')({
 });
 
 const Title = styled(Typography)({
+    fontFamily: 'SF Pro Text Medium',
     marginBottom: 8,
 });
 
@@ -36,7 +37,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     textAlign: 'center',
     margin: 'auto',
     [theme.breakpoints.down('sm')]: {
-        width: theme.breakpoints.values.sm,
+        width: theme.breakpoints.values.xs,
     },
 }));
 
@@ -72,7 +73,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <StyledGridContainer container>
-                <StyledContainer maxWidth="sm">
+                <StyledContainer maxWidth="xs">
                     <Logo src={LogoUrl} />
                     <Title variant="h1" color="textPrimary" gutterBottom>
                         Ronin Wallet
