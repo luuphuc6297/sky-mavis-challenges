@@ -36,23 +36,26 @@ const radomWallet = (userList) => {
                 assets: [
                     {
                         id: "usd",
+                        name: "United States dollar",
                         code: "USD",
                         symbol: "$",
-                        logo: "https://res.cloudinary.com/drcqjnla7/image/upload/v1654532965/image_9_stlx8j.svg",
+                        logo: "https://res.cloudinary.com/drcqjnla7/image/upload/v1654532965/image_9_stlx8j.svg"
                         amount: faker.finance.amount(4),
                     },
                     {
                         id: "eur",
+                        name: "The Euro",
                         code: "EUR",
                         symbol: "€",
-                        logo: 'https://res.cloudinary.com/drcqjnla7/image/upload/v1654528253/free-euro-coin-icon-2141-thumb_1_l19r0h.svg',
+                        logo: "https://res.cloudinary.com/drcqjnla7/image/upload/v1654528253/free-euro-coin-icon-2141-thumb_1_l19r0h.svg",
                         amount: faker.finance.amount(4),
                     },
                     {
                         id: "yen",
-                        code: "YEN",
+                        name: "Japanese yen",
+                        code: "JPY",
                         symbol: "¥",
-                        logo: 'https://res.cloudinary.com/drcqjnla7/image/upload/v1654528279/Icon_Yen_huufhj.svg',
+                        logo: "https://res.cloudinary.com/drcqjnla7/image/upload/v1654528279/Icon_Yen_huufhj.svg",
                         amount: faker.finance.amount(4),
                     },
                 ],
