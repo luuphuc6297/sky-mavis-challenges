@@ -1,9 +1,20 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import { AssetCard } from 'components';
 import * as React from 'react';
+
+export interface DialogTitleProps {
+    id: string;
+    children?: React.ReactNode;
+    onClose?: () => void;
+}
+
+export interface AssetListPopupProps {
+    open: boolean;
+    onClose?: () => void;
+}
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialog-paper': {
@@ -25,12 +36,6 @@ const StyledDialogTitle = styled(DialogTitle)(({ theme }) => ({
     lineHeight: '20px',
     fontSize: 14,
 }));
-
-export interface DialogTitleProps {
-    id: string;
-    children?: React.ReactNode;
-    onClose: () => void;
-}
 
 const BootstrapDialogTitle = (props: DialogTitleProps) => {
     const { children, onClose, ...other } = props;
@@ -56,29 +61,17 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export const AssetListPopup = () => {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-
+export const AssetListPopup = ({ open, onClose }: AssetListPopupProps) => {
+    console.log('open', open);
+    console.log('onClose', onClose);
     return (
-        <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
-                Open dialog
-            </Button>
-            <BootstrapDialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Assets
-                </BootstrapDialogTitle>
-                <DialogContent dividers>
-                    <AssetCard />
-                </DialogContent>
-            </BootstrapDialog>
-        </div>
+        <BootstrapDialog onClose={onClose} aria-labelledby="customized-dialog-title" open={open}>
+            <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
+                Assets
+            </BootstrapDialogTitle>
+            <DialogContent dividers>
+                <AssetCard />
+            </DialogContent>
+        </BootstrapDialog>
     );
 };

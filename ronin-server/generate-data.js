@@ -4,8 +4,6 @@ const currencies = require("./currencies.json");
 
 faker.locale = "en";
 
-const randomCurrencies = (numberOfCurrencies) => {};
-
 const randomUserList = (numberOfUsers) => {
     if (numberOfUsers <= 0) return [];
 
@@ -16,8 +14,8 @@ const randomUserList = (numberOfUsers) => {
             id: faker.datatype.uuid(),
             name: faker.name.findName(),
             username: faker.internet.userName().toLowerCase(),
+            roninAddress: faker.finance.account(16),
             avatar: faker.image.avatar(),
-            roninAddress: faker.random.numeric(16),
             createdAt: Date.now(),
             updatedAt: Date.now(),
         };
@@ -35,9 +33,29 @@ const radomWallet = (userList) => {
         Array.from(new Array(userList.length)).forEach(() => {
             const wallet = {
                 id: user.roninAddress,
-                userId: user.id,
-                currency: faker.helpers.arrayElements(["usd", "eur", "yen"], 2),
-                balance: faker.finance.amount(0, 100000),
+                assets: [
+                    {
+                        id: "usd",
+                        code: "USD",
+                        symbol: "$",
+                        logo: "https://res.cloudinary.com/drcqjnla7/image/upload/v1654532965/image_9_stlx8j.svg",
+                        amount: faker.finance.amount(4),
+                    },
+                    {
+                        id: "eur",
+                        code: "EUR",
+                        symbol: "€",
+                        logo: 'https://res.cloudinary.com/drcqjnla7/image/upload/v1654528253/free-euro-coin-icon-2141-thumb_1_l19r0h.svg',
+                        amount: faker.finance.amount(4),
+                    },
+                    {
+                        id: "yen",
+                        code: "YEN",
+                        symbol: "¥",
+                        logo: 'https://res.cloudinary.com/drcqjnla7/image/upload/v1654528279/Icon_Yen_huufhj.svg',
+                        amount: faker.finance.amount(4),
+                    },
+                ],
                 createdAt: Date.now(),
                 updatedAt: Date.now(),
             };

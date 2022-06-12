@@ -1,19 +1,31 @@
-import { User } from 'models';
+import { RoninAppStoreState, useStore } from 'app/store';
+import { isEmpty } from 'lodash';
+import { LoginProps } from 'models';
 import { LoginPage } from 'pages';
 import React from 'react';
 
 const LoginContainer = () => {
-    const initialValues: User = {
-        email: '',
+    const initialValues: LoginProps = {
         password: '',
-    } as User;
+    } as LoginProps;
+
+    const { currencies, getCurrentUser, storeCurrencies }: RoninAppStoreState | any = useStore();
 
     React.useEffect(() => {
         localStorage.removeItem('access_token');
     });
 
-    const handleLogin = async (formValues: User) => {
+    React.useEffect(() => {
+        if (isEmpty(currencies)) {
+            (async () => {
+                storeCurrencies();
+            })();
+        }
+    }, []);
+
+    const handleLogin = async (formValues: LoginProps) => {
         //TODO: call api to login
+        await getCurrentUser();
     };
 
     return <LoginPage initialValues={initialValues} onSubmit={handleLogin} />;

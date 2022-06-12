@@ -1,5 +1,14 @@
 import { createTheme } from '@mui/material/styles';
 const SFProTextTTF = '/fonts/SFProText-Regular.ttf';
+const SFProTextHeavyTFF = '/fonts/SFProText-Heavy.ttf';
+declare module '@mui/material/styles/createTypography' {
+    interface TypographyOptions {
+        heavy: string;
+    }
+    interface Typography {
+        heavy: string;
+    }
+}
 
 const theme = createTheme({
     palette: {
@@ -12,6 +21,7 @@ const theme = createTheme({
     },
     typography: {
         fontFamily: ['SF Pro Text'].join(','),
+        heavy: 'SF Pro Text Heavy',
         h1: { fontSize: 32, fontWeight: 700, lineHeight: '32px' },
         body1: { fontSize: 16, fontWeight: 700, lineHeight: '20px' },
         body2: { fontSize: 14, fontWeight: 600, lineHeight: '20px' },
@@ -19,6 +29,13 @@ const theme = createTheme({
         button: { fontSize: 14, fontWeight: 600, lineHeight: '20px', textTransform: 'none' },
     },
     components: {
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    borderColor: '#C5CEE0',
+                },
+            },
+        },
         MuiCssBaseline: {
             styleOverrides: `
                 @font-face {
@@ -32,6 +49,15 @@ const theme = createTheme({
     },
     shape: {
         borderRadius: 8,
+    },
+    breakpoints: {
+        values: {
+            xs: 480,
+            sm: 768,
+            md: 1080,
+            lg: 1200,
+            xl: 1536,
+        },
     },
 });
 

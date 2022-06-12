@@ -24,6 +24,10 @@ const StyledGridContainer = styled(Grid)(({ theme }) => ({
     marginBottom: 14,
 }));
 
+const StyledGridItem = styled(Grid)(({ theme }) => ({
+    padding: 0,
+}));
+
 const StyledTypography = styled(Typography)(({ theme }) => ({
     fontWeight: 600,
     fontSize: 14,
@@ -80,7 +84,7 @@ const StyledWhiteLogo = styled('img')(({ theme }) => ({
 
 export const MyWallet = () => {
     return (
-        <GradientBox colors={[blue[500], blue[700]]}>
+        <GradientBox colors={[blue[700], blue[500]]}>
             <StyledGridContainer container direction="row" justifyContent="space-between" alignItems="center">
                 <Grid item>
                     <Grid container>

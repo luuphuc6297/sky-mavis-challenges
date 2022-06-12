@@ -1,13 +1,19 @@
-import currencyApi from 'apis/currencies';
-import { Currency, ListResponse } from 'models';
+import { RoninAppStoreState, useStore } from 'app/store';
 import WalletPage from 'pages/Wallet';
 import React from 'react';
-import { useQuery } from 'react-query';
 
 const WalletContainer = () => {
-    const currencies = useQuery<ListResponse<Currency>, Error>('currencies', currencyApi.getCurrencies);
+    // const currencies = useQuery<ListResponse<Currency>, Error>('currencies', currencyApi.getCurrencies);
 
+    const { user, getWallet }: RoninAppStoreState | any = useStore();
 
+    React.useEffect(() => {
+        if (user) {
+            (async () => {
+                await getWallet();
+            })();
+        }
+    }, [getWallet, user]);
     return <WalletPage />;
 };
 export default WalletContainer;

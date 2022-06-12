@@ -5,8 +5,8 @@ import theme from 'configs/theme';
 import { AnimatePresence } from 'framer-motion';
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter } from 'react-router-dom';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { BrowserRouter } from 'react-router-dom';
 import Router from './routes';
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
                     queries: {
                         retry: 0,
                         refetchOnWindowFocus: false,
+                        // queryFn: defaultQueryFn,
                     },
                 },
             })

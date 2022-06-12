@@ -6,14 +6,13 @@ import { styled } from '@mui/system';
 import { LogoUrl } from 'assets';
 import { InputField, SubmitButton } from 'components';
 import { TextFiledLabel } from 'components/base/Typography';
-import { User } from 'models';
+import { LoginProps } from 'models';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { LoginSchema } from './validation';
-
 export interface LoginFormProps {
-    initialValues?: User;
-    onSubmit?: (formValues: User) => void;
+    initialValues?: LoginProps;
+    onSubmit?: (formValues: LoginProps) => void;
 }
 
 const Logo = styled('img')({
@@ -47,7 +46,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
         control,
         handleSubmit,
         formState: { isSubmitting, isValid },
-    } = useForm<User>({
+    } = useForm<LoginProps>({
         mode: 'onChange',
         defaultValues: initialValues,
         resolver: yupResolver(LoginSchema),
@@ -60,7 +59,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleFormSubmit = async (formValues: User) => {
+    const handleFormSubmit = async (formValues: LoginProps) => {
         try {
             // Clear previous submission error
             // await onSubmit?.(formValues);
@@ -73,7 +72,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <StyledGridContainer container>
-                <StyledContainer maxWidth="xs">
+                <StyledContainer maxWidth="sm">
                     <Logo src={LogoUrl} />
                     <Title variant="h1" color="textPrimary" gutterBottom>
                         Ronin Wallet

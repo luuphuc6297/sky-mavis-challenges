@@ -8,4 +8,6 @@ export * from './partials/FromInputFiled';
 export * from './partials/MyWallet';
 export * from './partials/NavigateBar';
 export * from './partials/RoninStatus';
+export * from './partials/SelectAssetsField';
 export * from './partials/SendAssetAppBar';
+

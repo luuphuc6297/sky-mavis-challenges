@@ -19,10 +19,14 @@ const StyledFromInputField = styled(TextField)(({ theme }) => ({
     marginTop: 0,
     height: 40,
     width: 336,
-    '&.MuiInputBase-root': {
-        backgroundColor: '#C5CEE0',
+    '& .MuiOutlinedInput-root': {
+        backgroundColor: '#EDF1F7',
         fontWeight: 400,
         fontSize: 14,
+        color: '#8F9BB3',
+    },
+    '& .MuiInputAdornment-root': {
+        height: 0,
     },
 }));
 
@@ -38,6 +42,10 @@ const StyledPrefix = styled(Typography)(({ theme }) => ({
     fontWeight: 600,
     fontSize: 14,
     lineHeight: '20px',
+    color: '#8F9BB3',
+    '& .MuiInputAdornment-root': {
+        height: 0,
+    },
 }));
 
 export const FromInputFiled = ({ name, control, apiError, InputProps, ...inputProps }: FromInputFiledProps) => {

@@ -4,6 +4,7 @@ import { EURIconUrl } from 'assets';
 import React from 'react';
 
 const StyledCard = styled(Card)(({ theme }) => ({
+    width: 336,
     paddingLeft: 20,
     paddingTop: 16,
     paddingBottom: 16,
