@@ -1,19 +1,21 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
-import Button from '@mui/material/Button';
+import { Dialog, DialogContent, DialogProps, DialogTitle, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { RoninAppStoreState, useStore } from 'app/store';
 import { AssetCard } from 'components';
+import { Assets } from 'models';
 import * as React from 'react';
 
+export type CloseReason = 'backdropClick' | 'escapeKeyDown' | 'closeButtonClick';
 export interface DialogTitleProps {
     id: string;
     children?: React.ReactNode;
-    onClose?: () => void;
+    onClose?: (reason: CloseReason | any) => void;
 }
 
-export interface AssetListPopupProps {
+export interface AssetListPopupProps extends DialogProps {
     open: boolean;
-    onClose?: () => void;
+    onClose: (reason: CloseReason | any) => void;
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -46,7 +48,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
             {onClose ? (
                 <IconButton
                     aria-label="close"
-                    onClick={onClose}
+                    onClick={() => onClose('closeButtonClick')}
                     sx={{
                         position: 'absolute',
                         right: 8,
@@ -62,15 +64,18 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export const AssetListPopup = ({ open, onClose }: AssetListPopupProps) => {
-    console.log('open', open);
-    console.log('onClose', onClose);
+    const { wallet }: RoninAppStoreState | any = useStore();
+
     return (
-        <BootstrapDialog onClose={onClose} aria-labelledby="customized-dialog-title" open={open}>
+        <BootstrapDialog onClose={(_, reason) => onClose(reason)} aria-labelledby="customized-dialog-title" open={open}>
             <BootstrapDialogTitle id="customized-dialog-title" onClose={onClose}>
                 Assets
             </BootstrapDialogTitle>
             <DialogContent dividers>
-                <AssetCard />
+                {wallet &&
+                    wallet?.assets.map((asset: Assets) => (
+                        <AssetCard key={asset?.id} logo={asset?.logo} code={asset?.code} amount={asset?.amount} />
+                    ))}
             </DialogContent>
         </BootstrapDialog>
     );

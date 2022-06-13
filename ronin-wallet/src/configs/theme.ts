@@ -36,7 +36,7 @@ const theme = createTheme({
         body1: { fontSize: 16, fontWeight: 700, lineHeight: '20px' },
         body2: { fontSize: 14, fontWeight: 600, lineHeight: '20px' },
         caption: { fontSize: 14, fontWeight: 400, lineHeight: '20px' },
-        button: { fontSize: 14, fontWeight: 600, lineHeight: '20px', textTransform: 'none' },
+        button: { fontSize: 14, fontWeight: 600, lineHeight: '20px', textTransform: 'none', boxShadow: 'none' },
     },
     components: {
         MuiOutlinedInput: {

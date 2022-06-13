@@ -3,7 +3,7 @@ import WalletPage from 'pages/Wallet';
 import React from 'react';
 
 const WalletContainer = () => {
-    const { user, wallet, getWallet }: RoninAppStoreState | any = useStore();
+    const { user, getWallet }: RoninAppStoreState | any = useStore();
 
     React.useEffect(() => {
         if (user?.id) {
@@ -11,8 +11,9 @@ const WalletContainer = () => {
                 await getWallet(user?.roninAddress);
             })();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user]);
 
-    return <>{wallet?.assets && <WalletPage />}</>;
+    return <>{user && <WalletPage />}</>;
 };
 export default WalletContainer;

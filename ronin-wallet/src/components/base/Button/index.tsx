@@ -1,7 +1,6 @@
 import { Button } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { styled } from '@mui/system';
-import React from 'react';
 
 type GradientBtnProps = {
     colors?: string[];
@@ -13,6 +12,8 @@ const SubmitGradientBtn = styled(Button)<GradientBtnProps>(({ colors }) => ({
     height: 40,
     marginBottom: 24,
     color: 'white',
+    width: 88,
+    boxShadow: 'none',
     ...(colors && {
         background: `linear-gradient(to right bottom, ${colors.join(',')})`,
     }),

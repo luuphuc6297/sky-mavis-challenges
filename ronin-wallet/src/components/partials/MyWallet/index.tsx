@@ -3,7 +3,6 @@ import { blue } from '@mui/material/colors';
 import { styled } from '@mui/system';
 import { CopyIconUrl, WhiteLogoUrl } from 'assets';
 import { formatter, numberWithSpaces } from 'helpers';
-import React from 'react';
 
 type GradientBoxProps = {
     colors?: string[];
@@ -22,10 +21,6 @@ const GradientBox = styled(Box)<GradientBoxProps>(({ colors }) => ({
 
 const StyledGridContainer = styled(Grid)(({ theme }) => ({
     marginBottom: 14,
-}));
-
-const StyledGridItem = styled(Grid)(({ theme }) => ({
-    padding: 0,
 }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({

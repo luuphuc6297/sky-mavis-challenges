@@ -40,12 +40,12 @@ const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
         <Box sx={{ flexGrow: 1 }}>
             <SendAssetAppBar />
             <StyledGridContainer container>
-                <StyledContainer maxWidth="sm">
+                <StyledContainer maxWidth="xs">
                     <FromInputFiled control={control} name="from" />
 
                     <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
 
-                    <SelectAssetsField />
+                    <SelectAssetsField htmlFor="assets" textLabel="ASSETS" />
                 </StyledContainer>
             </StyledGridContainer>
         </Box>

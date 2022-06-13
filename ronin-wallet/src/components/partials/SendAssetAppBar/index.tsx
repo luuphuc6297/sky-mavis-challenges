@@ -2,6 +2,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { ChevronLeftIcon } from 'assets';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StyledBoxAppBar = styled(Box)(({ theme }) => ({
     '& .MuiPaper-root': {
@@ -31,11 +32,20 @@ const StyledLogo = styled('img')(({ theme }) => ({
 }));
 
 export const SendAssetAppBar = () => {
+    const navigate = useNavigate();
+
     return (
         <StyledBoxAppBar sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <StyledToolbar>
-                    <StyledIconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+                    <StyledIconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
+                        onClick={() => navigate('/wallet')}
+                    >
                         <StyledLogo src={ChevronLeftIcon} />
                     </StyledIconButton>
                     <StyledTitle sx={{ flexGrow: 1 }}>Send Assets</StyledTitle>

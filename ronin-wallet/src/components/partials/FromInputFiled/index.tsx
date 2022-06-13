@@ -1,8 +1,7 @@
 import { InputAdornment, TextField, Typography } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
 import { styled } from '@mui/material/styles';
 import { Error } from 'components/base/Typography/Error';
-import { TextFiledLabel } from 'components/base/Typography/TextFiledLabel';
-import React from 'react';
 import { Control, useController } from 'react-hook-form';
 
 interface FromInputFiledProps {
@@ -28,6 +27,17 @@ const StyledFromInputField = styled(TextField)(({ theme }) => ({
     '& .MuiInputAdornment-root': {
         height: 0,
     },
+}));
+
+const StyledTextFiledLabel = styled(InputLabel)(({ theme }) => ({
+    width: 336,
+    margin: '0 auto 4px auto',
+    fontFamily: 'SF Pro Text Medium',
+    fontSize: 10,
+    fontWeight: 700,
+    lineHeight: '16px',
+    color: '#57627B',
+    textAlign: 'left',
 }));
 
 const StyledInputAdornment = styled(InputAdornment)(({ theme }) => ({
@@ -59,7 +69,7 @@ export const FromInputFiled = ({ name, control, apiError, InputProps, ...inputPr
 
     return (
         <>
-            <TextFiledLabel htmlFor="from">FROM</TextFiledLabel>
+            <StyledTextFiledLabel htmlFor="from">FROM</StyledTextFiledLabel>
             <StyledFromInputField
                 fullWidth
                 size="small"
