@@ -1,10 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Container, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { RoninAppStoreState, useStore } from 'app/store';
-import { FromInputFiled, InputField, SendAssetAppBar, SelectAssetsField } from 'components';
+import { FromInputFiled, InputField, SelectAssetsField, SendAssetAppBar, AmountField } from 'components';
 import { SendAssetFormProps } from 'models';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { SendAssetSchema } from './validation';
 
@@ -26,8 +24,6 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
-    const { currencies }: RoninAppStoreState | any = useStore();
-
     const {
         control,
         handleSubmit,
@@ -46,6 +42,8 @@ const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
                     <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
 
                     <SelectAssetsField htmlFor="assets" textLabel="ASSETS" />
+
+                    <AmountField control={control} name="amount" />
                 </StyledContainer>
             </StyledGridContainer>
         </Box>

@@ -2,8 +2,9 @@ import { InputAdornment, TextField, Typography } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { styled } from '@mui/material/styles';
 import { Error } from 'components/base/Typography/Error';
+import { formatHideAddress } from 'helpers';
+import React from 'react';
 import { Control, useController } from 'react-hook-form';
-
 interface FromInputFiledProps {
     name: string;
     control: Control<any>;
@@ -59,6 +60,8 @@ const StyledPrefix = styled(Typography)(({ theme }) => ({
 }));
 
 export const FromInputFiled = ({ name, control, apiError, InputProps, ...inputProps }: FromInputFiledProps) => {
+    const [formatValue, setFormatted] = React.useState<string | any>();
+
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { invalid, error },
@@ -67,6 +70,11 @@ export const FromInputFiled = ({ name, control, apiError, InputProps, ...inputPr
         control,
     });
 
+    React.useEffect(() => {
+        const result = formatHideAddress(value);
+        setFormatted(`(${result})`);
+    }, [value]);
+
     return (
         <>
             <StyledTextFiledLabel htmlFor="from">FROM</StyledTextFiledLabel>
@@ -74,12 +82,13 @@ export const FromInputFiled = ({ name, control, apiError, InputProps, ...inputPr
                 fullWidth
                 size="small"
                 margin="normal"
-                value={value}
+                value={formatValue}
                 onChange={onChange}
                 onBlur={onBlur}
                 variant="outlined"
                 inputRef={ref}
                 error={invalid}
+                disabled
                 inputProps={inputProps}
                 InputProps={{
                     startAdornment: (

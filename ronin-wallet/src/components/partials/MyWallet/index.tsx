@@ -2,11 +2,17 @@ import { Box, Button, Divider, Grid, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { styled } from '@mui/system';
 import { CopyIconUrl, WhiteLogoUrl } from 'assets';
-import { formatter, numberWithSpaces } from 'helpers';
+import { convertToVnd, formatForVnd, numberWithCommas, getUsdAsset, numberWithSpaces } from 'helpers';
+import { Wallet } from 'models';
+import React from 'react';
 
 type GradientBoxProps = {
     colors?: string[];
 };
+
+interface MyWalletProps {
+    wallet: Wallet;
+}
 
 const GradientBox = styled(Box)<GradientBoxProps>(({ colors }) => ({
     borderRadius: 16,
@@ -78,14 +84,29 @@ const StyledWhiteLogo = styled('img')(({ theme }) => ({
     height: 40,
 }));
 
-export const MyWallet = () => {
+export const MyWallet = ({ wallet }: MyWalletProps) => {
+    const [usdCurrency, setUsdCurrency] = React.useState<number>(0);
+    const [vndAmount, setVndAmount] = React.useState<number>(0);
+
+    React.useEffect(() => {
+        const result = getUsdAsset(wallet);
+        setUsdCurrency(result?.amount);
+
+        if (result?.code && result?.amount) {
+            (async () => {
+                const vnd: number | any = await convertToVnd(result?.code, result?.amount);
+                setVndAmount(vnd);
+            })();
+        }
+    }, [wallet]);
+
     return (
         <GradientBox colors={[blue[700], blue[500]]}>
             <StyledGridContainer container direction="row" justifyContent="space-between" alignItems="center">
                 <Grid item>
                     <Grid container>
                         <StyledTypography>My wallet</StyledTypography>
-                        <StyledAddress>({numberWithSpaces(7300377738883334)})</StyledAddress>
+                        <StyledAddress>({numberWithSpaces(wallet?.id)})</StyledAddress>
                     </Grid>
                 </Grid>
                 <Grid item>
@@ -97,8 +118,8 @@ export const MyWallet = () => {
             <StyledDivider />
             <Grid container direction="row" justifyContent="space-between" alignItems="center">
                 <Grid item>
-                    <StyledMainAssetUsd>{formatter.format(1000)} USD</StyledMainAssetUsd>
-                    <StyledMainAssetVnd>23,046,000 VND</StyledMainAssetVnd>
+                    <StyledMainAssetUsd>{numberWithCommas(usdCurrency)} USD</StyledMainAssetUsd>
+                    <StyledMainAssetVnd>{formatForVnd(vndAmount)} VND</StyledMainAssetVnd>
                 </Grid>
                 <Grid item>
                     <StyledWhiteLogo src={WhiteLogoUrl} />

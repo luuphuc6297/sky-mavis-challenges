@@ -1,11 +1,6 @@
-export const formatter = new Intl.NumberFormat('en-IN', {
-    maximumSignificantDigits: 3,
-});
-
-export const formatForVnd = (amount: number | any) => {
-    return amount.toLocaleString('en-US');
+export const numberWithCommas = (address: string | number | any) => {
+    return address.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
-
 export const numberWithSpaces = (address: string | number | any) => {
     return address.toString().replace(/\B(?=(\d{4})+(?!\d))/g, ' ');
 };

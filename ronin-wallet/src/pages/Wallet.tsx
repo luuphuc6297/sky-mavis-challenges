@@ -57,7 +57,7 @@ const WalletPage = () => {
                 </StyledGridAccount>
                 <StyledGridWallet container justifyContent="space-between" spacing={2}>
                     <Grid item>
-                        <MyWallet />
+                        <MyWallet wallet={wallet} />
                         <StyledGridNavigateBar pt={2.5} justifyContent="center">
                             <NavigateBar />
                         </StyledGridNavigateBar>

@@ -46,6 +46,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
+    console.log('showPassword', showPassword);
     const {
         control,
         handleSubmit,
@@ -63,6 +64,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
+
     const handleFormSubmit = async (formValues: LoginProps) => {
         try {
             await onSubmit?.(formValues);
@@ -89,7 +91,7 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
                         <InputField
                             id="password"
                             name="password"
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             control={control}
                             InputProps={{
                                 endAdornment: (

@@ -1,20 +1,17 @@
-import React from 'react';
+import { RoninAppStoreState, useStore } from 'app/store';
 import { SendAssetFormProps } from 'models';
 import { SendAssetPage } from 'pages';
-// import { formatHideAddress } from 'helpers';
+import React from 'react';
+
 const SendAssetContainer = () => {
+    const { wallet }: RoninAppStoreState | any = useStore();
+
     const initialValues: SendAssetFormProps = {
-        from: `(${7300377738883334})`,
+        from: wallet?.id,
         to: '',
         assets: '',
         amount: 0,
     } as SendAssetFormProps;
-
-    // React.useEffect(() => {
-    //     const result = formatHideAddress({ address: 7300377738883334 });
-
-    //     console.log('result__', result);
-    // }, []);
 
     React.useEffect(() => {
         localStorage.removeItem('access_token');
