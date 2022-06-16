@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 
 const LoginContainer = React.lazy(() => import('containers/auth/Login'));
@@ -12,14 +12,29 @@ const Router = () => {
             path: '/',
             element: <MainLayout />,
             children: [
-                { path: '/login', element: <LoginContainer /> },
+                {
+                    path: '/login',
+                    element: (
+                        <Suspense>
+                            <LoginContainer />
+                        </Suspense>
+                    ),
+                },
                 {
                     path: '/wallet',
-                    element: <WalletContainer />,
+                    element: (
+                        <Suspense>
+                            <WalletContainer />
+                        </Suspense>
+                    ),
                 },
                 {
                     path: '/send',
-                    element: <SendAssetContainer />,
+                    element: (
+                        <Suspense>
+                            <SendAssetContainer />
+                        </Suspense>
+                    ),
                 },
             ],
         },

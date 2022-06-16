@@ -1,12 +1,15 @@
 import { createTheme } from '@mui/material/styles';
 const SFProTextTTF = '/fonts/SFProText-Regular.ttf';
 const SFProTextMediumTFF = '/fonts/SFProText-Medium.ttf';
+const InterRegularTTF = '/fonts/Inter-Regular.ttf';
 declare module '@mui/material/styles/createTypography' {
     interface TypographyOptions {
         medium: string;
+        inter: string;
     }
     interface Typography {
         medium: string;
+        inter: string;
     }
 }
 
@@ -18,6 +21,11 @@ const SFProText = `@font-face {
 const SFProTextMedium = `@font-face {
     font-family: SF Pro Text Medium;
     src: url(${SFProTextMediumTFF}) format("opentype");
+}`;
+
+const Inter = `@font-face {
+    font-family: Inter;
+    src: url(${InterRegularTTF}) format("opentype");
 }`;
 
 const theme = createTheme({
@@ -32,6 +40,7 @@ const theme = createTheme({
     typography: {
         fontFamily: ['SF Pro Text'].join(','),
         medium: 'SF Pro Text Medium',
+        inter: 'Inter',
         h1: { fontSize: 32, fontWeight: 700, lineHeight: '32px' },
         body1: { fontSize: 16, fontWeight: 700, lineHeight: '20px' },
         body2: { fontSize: 14, fontWeight: 600, lineHeight: '20px' },
@@ -66,6 +75,7 @@ const theme = createTheme({
             styleOverrides: `
             ${SFProText}
             ${SFProTextMedium}
+            ${Inter}
             `,
         },
     },

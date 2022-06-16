@@ -32,11 +32,13 @@ const StyledMaxBtnLabel = styled(Typography)(({ theme }) => ({
     borderRadius: 8,
     fontSize: 10,
     lineHeight: '16px',
-    fontFamily: 'SF Pro Text Medium',
+    fontFamily: 'Inter',
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: '#57627B',
+    letterSpacing: '0.5px',
 }));
 
 const StyledAvailable = styled(Typography)(({ theme }) => ({

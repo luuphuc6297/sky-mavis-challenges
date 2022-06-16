@@ -9,7 +9,7 @@ const fastForexApis = {
         const url = '/fetch-multi';
         return axiosServicesClient.get(url, {
             params: {
-                to: 'JPY%2CEUR',
+                to: 'JPY,EUR',
                 api_key: FASTFOREX_API_KEY,
             },
         });
