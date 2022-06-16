@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Error } from 'components/base/Typography/Error';
 import { TextFiledLabel } from 'components/base/Typography/TextFiledLabel';
-import React, { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 import { Control, useController } from 'react-hook-form';
 export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     name: string;
@@ -56,6 +56,21 @@ export function InputField({
                 label={label}
                 inputProps={inputProps}
                 InputProps={InputProps}
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        '& > fieldset': { border: '1px solid #C5CEE0' },
+                    },
+                    '& .MuiOutlinedInput-root.Mui-focused': {
+                        '& > fieldset': {
+                            border: '1px solid #C5CEE0',
+                        },
+                    },
+                    '& .MuiOutlinedInput-root:hover': {
+                        '& > fieldset': {
+                            border: '1px solid #C5CEE0',
+                        },
+                    },
+                }}
             />
             <Error error={true}>{error?.message || apiError}</Error>
         </>

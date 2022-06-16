@@ -2,10 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Container, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { FromInputFiled, InputField, SelectAssetsField, SendAssetAppBar, AmountField } from 'components';
-import { SendAssetFormProps } from 'models';
+import { Assets, SendAssetFormProps } from 'models';
 import { useForm } from 'react-hook-form';
 import { SendAssetSchema } from './validation';
-
+import React from 'react';
+import { RoninAppStoreState, useStore } from 'app/store';
+import { StyledLabelLogo, OptionsProps } from 'components/partials/SelectAssetsField';
 interface SendAssetProps {
     initialValues?: SendAssetFormProps;
     onSubmit?: (formValues: SendAssetFormProps) => void;
@@ -24,14 +26,41 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 }));
 
 const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
+    const [currentOption, setCurrentOptions] = React.useState<OptionsProps[] | any>();
+    const { wallet }: RoninAppStoreState | any = useStore();
+    const [options, setOptions] = React.useState<any>();
+
     const {
         control,
         handleSubmit,
         formState: { isSubmitting },
+        setValue,
     } = useForm<SendAssetFormProps>({
         defaultValues: initialValues,
         resolver: yupResolver(SendAssetSchema),
     });
+
+    React.useEffect(() => {
+        if (wallet) {
+            const getOptions: OptionsProps[] | any = wallet?.assets.map((asset: Assets) => {
+                return {
+                    value: asset?.id,
+                    text: asset?.code,
+                    icon: <StyledLabelLogo src={asset?.logo} />,
+                    amount: asset?.amount,
+                };
+            });
+            setOptions(getOptions);
+            setCurrentOptions(getOptions[0]);
+        }
+    }, [wallet]);
+
+    const handleMaxAmount = React.useCallback(() => {
+        if (currentOption) {
+            setValue('amount', currentOption?.amount);
+        }
+    }, [currentOption, setValue]);
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <SendAssetAppBar />
@@ -41,9 +70,20 @@ const SendAssetPage = ({ initialValues, onSubmit }: SendAssetProps) => {
 
                     <InputField control={control} name="to" htmlFor="to" textLabel="TO" />
 
-                    <SelectAssetsField htmlFor="assets" textLabel="ASSETS" />
+                    <SelectAssetsField
+                        htmlFor="assets"
+                        textLabel="ASSETS"
+                        options={options}
+                        currentOption={currentOption}
+                        setCurrentOptions={setCurrentOptions}
+                    />
 
-                    <AmountField control={control} name="amount" />
+                    <AmountField
+                        control={control}
+                        name="amount"
+                        currentOption={currentOption}
+                        handleMaxAmount={handleMaxAmount}
+                    />
                 </StyledContainer>
             </StyledGridContainer>
         </Box>

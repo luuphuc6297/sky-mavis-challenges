@@ -1,4 +1,4 @@
-import { Tty } from '@mui/icons-material';
+import { OptionsProps } from 'components/partials/SelectAssetsField';
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Error } from 'components/base/Typography/Error';
@@ -12,6 +12,8 @@ export interface AmountFieldProps extends InputHTMLAttributes<HTMLInputElement> 
     label?: string;
     apiError?: any;
     htmlFor?: string;
+    currentOption?: OptionsProps;
+    handleMaxAmount?: () => void;
 }
 
 const StyledInput = styled(TextField)({
@@ -37,7 +39,25 @@ const StyledMaxBtnLabel = styled(Typography)(({ theme }) => ({
     justifyContent: 'center',
 }));
 
-export function AmountField({ name, control, apiError, label, ...inputProps }: AmountFieldProps) {
+const StyledAvailable = styled(Typography)(({ theme }) => ({
+    width: 336,
+    fontSize: 10,
+    fontWeight: 700,
+    lineHeight: '16px',
+    color: theme.palette.text.primary,
+    textAlign: 'right',
+    fontFamily: 'SF Pro Text Medium',
+}));
+
+export function AmountField({
+    name,
+    control,
+    apiError,
+    label,
+    currentOption,
+    handleMaxAmount,
+    ...inputProps
+}: AmountFieldProps) {
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { invalid, error },
@@ -46,12 +66,11 @@ export function AmountField({ name, control, apiError, label, ...inputProps }: A
         control,
     });
 
-    const handleMaxAmount = () => {};
-
     return (
         <>
-            <Box>
+            <Box sx={{ width: 336, display: 'flex', justifyContent: 'space-between', margin: '0 auto' }}>
                 <TextFiledLabel htmlFor="amount">AMOUNT</TextFiledLabel>
+                <StyledAvailable>AVAILABLE: {`${currentOption?.amount} ${currentOption?.text}`}</StyledAvailable>
             </Box>
             <StyledInput
                 fullWidth
@@ -73,6 +92,21 @@ export function AmountField({ name, control, apiError, label, ...inputProps }: A
                             </IconButton>
                         </InputAdornment>
                     ),
+                }}
+                sx={{
+                    '& .MuiOutlinedInput-root': {
+                        '& > fieldset': { border: '1px solid #C5CEE0' },
+                    },
+                    '& .MuiOutlinedInput-root.Mui-focused': {
+                        '& > fieldset': {
+                            border: '1px solid #C5CEE0',
+                        },
+                    },
+                    '& .MuiOutlinedInput-root:hover': {
+                        '& > fieldset': {
+                            border: '1px solid #C5CEE0',
+                        },
+                    },
                 }}
             />
             <Error error={true}>{error?.message || apiError}</Error>

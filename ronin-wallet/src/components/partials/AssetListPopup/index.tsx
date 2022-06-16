@@ -1,8 +1,9 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogProps, DialogTitle, IconButton } from '@mui/material';
+import { Box, Dialog, DialogContent, DialogProps, DialogTitle, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { RoninAppStoreState, useStore } from 'app/store';
 import { AssetCard } from 'components';
+import { OptionsProps, StyledLabelLogo } from 'components/partials/SelectAssetsField';
 import { Assets } from 'models';
 import * as React from 'react';
 
@@ -16,6 +17,7 @@ export interface DialogTitleProps {
 export interface AssetListPopupProps extends DialogProps {
     open: boolean;
     onClose: (reason: CloseReason | any) => void;
+    setCurrentOptions?: (value: OptionsProps | any) => void;
 }
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -63,8 +65,19 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export const AssetListPopup = ({ open, onClose }: AssetListPopupProps) => {
+export const AssetListPopup = ({ open, onClose, setCurrentOptions }: AssetListPopupProps) => {
     const { wallet }: RoninAppStoreState | any = useStore();
+
+    const handleOnClick = (asset: Assets) => {
+        if (setCurrentOptions) {
+            setCurrentOptions({
+                value: asset.id,
+                text: asset.code,
+                icon: <StyledLabelLogo src={asset?.logo} />,
+                amount: asset.amount,
+            });
+        }
+    };
 
     return (
         <BootstrapDialog onClose={(_, reason) => onClose(reason)} aria-labelledby="customized-dialog-title" open={open}>
@@ -74,7 +87,9 @@ export const AssetListPopup = ({ open, onClose }: AssetListPopupProps) => {
             <DialogContent dividers>
                 {wallet &&
                     wallet?.assets.map((asset: Assets) => (
-                        <AssetCard key={asset?.id} logo={asset?.logo} code={asset?.code} amount={asset?.amount} />
+                        <Box onClick={() => handleOnClick(asset)} key={asset?.id}>
+                            <AssetCard logo={asset?.logo} code={asset?.code} amount={asset?.amount} />
+                        </Box>
                     ))}
             </DialogContent>
         </BootstrapDialog>

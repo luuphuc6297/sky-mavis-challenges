@@ -42,7 +42,23 @@ const theme = createTheme({
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
+                    fontFamily: 'SF Pro Text',
+                    fontSize: 14,
+                    fontWeight: 400,
+                    fontStyle: 'normal',
+                    color: '#151A30',
                     borderColor: '#C5CEE0',
+                    lineHeight: '20px',
+                },
+            },
+        },
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    fontFamily: 'SF Pro Text',
+                    fontStyle: 'normal',
+                    fontWeight: 600,
+                    lineHeight: '20px',
                 },
             },
         },

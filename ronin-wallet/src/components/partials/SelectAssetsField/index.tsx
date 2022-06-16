@@ -5,13 +5,25 @@ import { StackIconUrl } from 'assets';
 import { AssetListPopup } from 'components';
 import { TextFiledLabel } from 'components/base/Typography/TextFiledLabel';
 import { CloseReason } from 'components/partials/AssetListPopup';
+import { isEmpty } from 'lodash';
+import { Assets } from 'models';
 import React from 'react';
 import Select from 'react-select';
 
+export interface OptionsProps {
+    value: string;
+    text: string;
+    icon: any;
+    amount?: number | any;
+}
 interface SelectAssetsFieldProps {
     htmlFor?: string;
     textLabel?: string;
+    currentOption?: OptionsProps;
+    setCurrentOptions?: (value: OptionsProps | any) => void;
+    options: OptionsProps[];
 }
+
 const customStyles = {
     control: () => ({
         display: 'flex',
@@ -48,7 +60,7 @@ const customStyles = {
     }),
 };
 
-const StyledLabelLogo = styled('img')(({ theme }) => ({
+export const StyledLabelLogo = styled('img')(({ theme }) => ({
     width: 24,
     height: 24,
 }));
@@ -58,63 +70,49 @@ const StyledIcon = styled('img')(({ theme }) => ({
     height: 20,
 }));
 
-export const SelectAssetsField = ({ htmlFor, textLabel }: SelectAssetsFieldProps) => {
-    const { currencies }: RoninAppStoreState | any = useStore();
+export const SelectAssetsField = ({
+    htmlFor,
+    textLabel,
+    currentOption,
+    setCurrentOptions,
+    options,
+}: SelectAssetsFieldProps) => {
     const [open, setOpen] = React.useState<boolean>(false);
 
     const handleClose = (value: CloseReason) => {
         setOpen(false);
     };
 
-    const options = [
-        {
-            value: currencies[0]?.id,
-            text: currencies[0]?.code,
-            icon: <StyledLabelLogo src={currencies[0]?.logo} />,
-        },
-        {
-            value: currencies[1]?.id,
-            text: currencies[1]?.code,
-            icon: <StyledLabelLogo src={currencies[1]?.logo} />,
-        },
-        {
-            value: currencies[2]?.id,
-            text: currencies[2]?.code,
-            icon: <StyledLabelLogo src={currencies[2]?.logo} />,
-        },
-    ];
-    const formatOptionLabel = ({ value, label, text }: string | any) => (
-        <AssetListPopup open={open} onClose={handleClose} />
-    );
-
     return (
         <Box onClick={() => setOpen(!open)}>
             <TextFiledLabel htmlFor={htmlFor}>{textLabel}</TextFiledLabel>
-            <Select
-                isClearable={false}
-                theme={(theme) => ({ ...theme, borderRadius: 0 })}
-                styles={customStyles}
-                placeholder={''}
-                defaultValue={options[0]}
-                components={{
-                    DropdownIndicator: () => {
-                        return <StyledIcon src={StackIconUrl} />;
-                    },
-                    IndicatorSeparator: () => null,
-                }}
-                options={options}
-                formatOptionLabel={formatOptionLabel}
-                //@ts-ignore
-                getOptionLabel={(e: any) => (
-                    <Box style={{ display: 'flex', alignItems: 'center' }}>
-                        {e.icon}
-                        <Typography style={{ marginLeft: 5, fontWeight: 400 }}>{e.text}</Typography>
-                    </Box>
-                )}
-                openMenuOnClick={false}
-                isSearchable={false}
-            />
-            {/* <AssetListPopup open={open} onClose={handleClose} /> */}
+            {!isEmpty(options) && (
+                <Select
+                    isClearable={false}
+                    theme={(theme) => ({ ...theme, borderRadius: 0 })}
+                    styles={customStyles}
+                    placeholder={''}
+                    defaultValue={options[0]}
+                    components={{
+                        DropdownIndicator: () => {
+                            return <StyledIcon src={StackIconUrl} />;
+                        },
+                        IndicatorSeparator: () => null,
+                    }}
+                    options={options}
+                    //@ts-ignore
+                    getOptionLabel={(e: OptionsProps) => (
+                        <Box style={{ display: 'flex', alignItems: 'center' }}>
+                            {e.icon}
+                            <Typography style={{ marginLeft: 5, fontWeight: 400 }}>{e.text}</Typography>
+                        </Box>
+                    )}
+                    value={currentOption}
+                    openMenuOnClick={false}
+                    isSearchable={false}
+                />
+            )}
+            <AssetListPopup open={open} onClose={handleClose} setCurrentOptions={setCurrentOptions} />
         </Box>
     );
 };

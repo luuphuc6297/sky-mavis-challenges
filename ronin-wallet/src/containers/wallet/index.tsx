@@ -12,7 +12,7 @@ const WalletContainer = () => {
             })();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user, wallet]);
+    }, [user]);
 
     return <>{wallet && <WalletPage />}</>;
 };

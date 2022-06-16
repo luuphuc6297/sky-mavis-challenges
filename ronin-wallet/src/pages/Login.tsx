@@ -46,7 +46,6 @@ const LoginPage = ({ initialValues, onSubmit }: LoginFormProps) => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
-    console.log('showPassword', showPassword);
     const {
         control,
         handleSubmit,
